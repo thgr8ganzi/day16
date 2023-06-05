@@ -103,12 +103,12 @@
             success:function(res){
                 console.log(res)
                 if(res.result.code == 200){
-                    //사용자 브라우저에 Local Storage영역에 서버에서 발급받은 토큰을 저장한다.
                     localStorage.setItem('token', res.result.data);
+                    //사용자 브라우저에 Local Storage영역에 서버에서 발급받은 토큰을 저장한다.
                     //localStorage.getItem('msofttoken’); //저장된 토큰 불러올때
-                    //location.href ="/chat";
+                    location.href ="/chat";
                 }else{
-                    alert(res.result.msg);
+                    console.log(res)
                 }
             }
         });

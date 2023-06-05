@@ -501,8 +501,8 @@
                                     <a class="dropdown-item offline" href="#">Offline</a>
                                 </div>
                             </div>
-                            <h5>Jennifer Lopezx</h5>
-                            <h6>Bern, Switzerland</h6>
+                            <h5 id="name">Jennifer Lopezx</h5>
+                            <h6 id="email">Bern, Switzerland</h6>
                         </div>
                         <!-- User profile end -->
 
@@ -1934,6 +1934,29 @@
 
 <!-- Main Js Required -->
 <script src="js/main.js"></script>
+<script>
+    $('#profile-tab').click(function (){
+        $.ajax({
+            type:"GET",
+            url:"/api/member/profile",
+            headers:{
+                'Authorization':'Bearer ' + localStorage.getItem('token')
+            },
+            dataType:'json',
+            success:function(result){
+                console.log(result);
+                if(result.result.code == 200){
+                    $('#name').html(result.result.data.name);
+                    $('#email').html(result.result.data.email);
+                }else{
 
+                }
+            },
+            error:function(xhr,status,error){
+                location.href = "/login";
+            }
+        });
+    });
+</script>
 </body>
 </html>

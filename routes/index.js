@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index',{ title: 'express' });
 });
 
 router.get('/chat', function(req, res, next) {
@@ -47,6 +47,10 @@ router.get('/verify', function(req, res, next) {
     console.log(err);
   }
     res.json({result});
+});
+
+router.get('/profile', function(req, res, next) {
+  res.render('profile');
 });
 
 module.exports = router;

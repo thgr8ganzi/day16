@@ -60,5 +60,40 @@ router.post('/login', async (req, res, next) =>{
     res.json({result});
 })
 
+router.get('/profile', async (req, res, next) =>{
+    let result = {
+        msg : '',
+        code : 200,
+        data : null
+    }
+
+    try{
+        const token =  req.headers.authorization.split('Bearer ')[1];
+        if(token == undefined){
+            return res.json({msg : '토큰이 없습니다', code : 404});
+        }
+
+        const userData = jwt.verify(token, process.env.JWT_KEY);
+        if(userData == null){
+            return res.json({msg : '토큰이 만료되었습니다'});
+        }
+        const email = userData.email;
+
+
+        const memberData = await db.Member.findOne({where : {email : email}});
+        if(memberData == null){
+            return res.json({msg : '회원정보가 없습니다'});
+        }
+
+        memberData.password = null;
+        result.msg = 'success';
+        result.data = memberData;
+        return res.json({result});
+    }catch (err){
+        result.msg = '서버 에러 발생';
+        result.code = 500;
+    }
+})
+
 
 module.exports = router;
