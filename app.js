@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const env = require('dotenv').config();
+const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,6 +14,8 @@ const sequelize = require('./models/index').sequelize;
 
 var app = express();
 sequelize.sync(); // 서버 실행시 mysql db 서버와 연결하고 테이블을 자동으로 생성한다
+
+app.use(cors()); // CORS 허용
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

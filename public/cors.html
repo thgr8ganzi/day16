@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cors</title>
+    <script src="./js/jquery.min.js"></script>
+</head>
+<body>
+<h1>cors</h1>
+<p>호출하려는 Rest API 주소와 RESTAPI 를 호출하는 웹페이지 주소 도메인이 동일하면 문제가 안된다.</p>
+<p>호출하려는 Rest API 주소와 RESTAPI 를 호출하는 웹페이지 주소 도메인이 다른경우 데이터 호출불가 이슈발생 = CORS 이슈</p>
+<script>
+    $.get('http://localhost:3000/api/member/all', function (data) {
+        console.log(data);
+    });
+</script>
+</body>
+</html>

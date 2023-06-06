@@ -95,5 +95,10 @@ router.get('/profile', async (req, res, next) =>{
     }
 })
 
+router.get('/all', async (req, res, next) =>{
+    let members = await db.Member.findAll();
+    res.json({members});
+})
+
 
 module.exports = router;
